@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref, shallowRef } from 'vue';
 import TheWelcome from '../components/TheWelcome.vue'
 import Button from 'primevue/button';
+import useAuthStore from '@/stores/auth';
+import { storeToRefs } from 'pinia';
+
+
+const { token, refreshToken } = storeToRefs(useAuthStore())
 
 
 const listener = (e) => {
@@ -16,6 +21,11 @@ onUnmounted(() => {
   removeEventListener('scroll', listener)
 })
 
+const person = ref({
+  name: 'John',
+  age: 25
+})
+
 </script>
 
 <template>
@@ -23,6 +33,19 @@ onUnmounted(() => {
     <RouterLink to="/about">About</RouterLink>
     <a href="/about">About</a>
     <Button label="Click" icon="pi pi-check" @click="() => console.log('clicked')"></Button>
+    <Button @click="person.name = 'toto'">
+      {{ person.name }}
+    </Button>
+    {{
+      token
+    }}
+
+    {{
+      refreshToken
+    }}
+    <p>
+      {{ person.age }}
+    </p>
     <p>hello</p>
   </main>
 </template>

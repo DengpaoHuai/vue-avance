@@ -8,10 +8,12 @@ import 'primeicons/primeicons.css';
 import App from './App.vue';
 import router from './router';
 import { plugin, defaultConfig } from '@formkit/vue';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const app = createApp(App);
-
-app.use(createPinia());
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+app.use(pinia);
 app.use(router);
 app.use(plugin, defaultConfig);
 app.use(PrimeVue, {
