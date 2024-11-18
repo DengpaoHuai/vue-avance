@@ -1,5 +1,24 @@
 import { z } from 'zod';
 
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6, 'mdp trop court').max(20, 'trop long'),
+});
+
+export type LoginFormData = z.infer<typeof loginSchema>;
+
+export const registerSchema = loginSchema.merge(
+  z.object({
+    name: z.string().min(2, 'prenom trop court').max(20, 'trop long'),
+  }),
+);
+
+export type RegisterFormData = z.infer<typeof registerSchema>;
+
+/*
+
+import { z } from 'zod';
+
 const registerSchema = z.object({
   email: z
     .string()
@@ -10,19 +29,11 @@ const registerSchema = z.object({
   lastName: z.string().min(2, 'nom trop court').max(20, 'trop long'),
 });
 
-const customPassword = z.object({
-  password: z
-    .string()
-    .min(6, 'mdp trop court')
-    .max(20, 'trop long')
-    .regex(/[A-Z]/, 'doit contenir une majuscule')
-    .regex(/[0-9]/, 'doit contenir un chiffre')
-    .regex(/[a-z]/, 'doit contenir une minuscule')
-    .regex(/[^A-Za-z0-9]/, 'doit contenir un caractère spécial'),
-});
+
 
 export const loginSchema = registerSchema
   .omit({ firstName: true, lastName: true })
   .merge(customPassword);
 
 export type LoginFormData = z.infer<typeof loginSchema>;
+*/

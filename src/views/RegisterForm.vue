@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { loginSchema, type LoginFormData } from '@/schemas/auth.schema';
-import { login } from '@/services/auth.services';
+import { registerSchema, type RegisterFormData } from '@/schemas/auth.schema';
+import { login, register } from '@/services/auth.services';
 import { createZodPlugin } from '@formkit/zod'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -11,9 +11,9 @@ const error = ref<null | string>(null)
 const router = useRouter()
 
 const [zodPlugin, submitHandler] = createZodPlugin(
-    loginSchema,
-    async (formData: LoginFormData) => {
-        login(formData).then(() => {
+    registerSchema,
+    async (formData: RegisterFormData) => {
+        register(formData).then(() => {
             router.push('/')
         }).catch((err) => {
             error.value = handleError(err)
@@ -28,6 +28,7 @@ const [zodPlugin, submitHandler] = createZodPlugin(
     <h1>Validation from Zod schema</h1>
     <FormKit type="form" :plugins="[zodPlugin]" @submit="submitHandler">
 
+        <FormKit type="text" name="name" label="Your name" />
         <FormKit type="text" name="email" label="Your email" />
         <FormKit type="password" name="password" label="Your password" />
         <p v-if="error">

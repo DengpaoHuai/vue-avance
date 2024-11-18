@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const httpClient = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://78fd-90-58-170-121.ngrok-free.app/',
 });
 
 httpClient.interceptors.response.use(
