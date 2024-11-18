@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
 import TheWelcome from '../components/TheWelcome.vue'
-import { Button } from 'primevue';
+import Button from 'primevue/button';
 
 
 const listener = (e) => {

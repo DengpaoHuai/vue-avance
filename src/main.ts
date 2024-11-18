@@ -1,22 +1,23 @@
-import './assets/main.css'
+import './assets/main.css';
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import PrimeVue from 'primevue/config'
-import Aura from '@primevue/themes/aura'
-import 'primeicons/primeicons.css'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
+import 'primeicons/primeicons.css';
+import App from './App.vue';
+import router from './router';
+import { plugin, defaultConfig } from '@formkit/vue';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
-
+app.use(createPinia());
+app.use(router);
+app.use(plugin, defaultConfig);
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
   },
-})
+});
 
-app.mount('#app')
+app.mount('#app');

@@ -16,7 +16,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/vue": "^1.6.9",
+    "@formkit/zod": "^1.6.9",
     "@primevue/themes": "^4.2.2",
+    "axios": "^1.7.7",
     "pinia": "^2.2.6",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.2",
