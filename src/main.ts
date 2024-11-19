@@ -6,10 +6,11 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 import 'primeicons/primeicons.css';
 import App from './App.vue';
-import router from './router';
 import { plugin, defaultConfig } from '@formkit/vue';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
-import useAuthStore from './stores/auth';
+
+import { VueQueryPlugin } from '@tanstack/vue-query';
+import router from './pages/router';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -22,5 +23,6 @@ app.use(PrimeVue, {
     preset: Aura,
   },
 });
+app.use(VueQueryPlugin);
 
 app.mount('#app');

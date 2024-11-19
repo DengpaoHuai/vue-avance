@@ -40,7 +40,6 @@ const useAuthStore = defineStore(
   {
     persist: {
       storage: localStorage,
-      pick: ['token'],
     },
   },
 );

@@ -3,9 +3,18 @@ import useFetch from '@/composables/useFetch';
 import usePromise from '@/composables/usePromise';
 import { getPlanets } from '@/services/planet.services';
 import { type Planet, type PlanetResponse } from '@/types/planet.types';
+import { useQuery } from '@tanstack/vue-query';
+import { ref } from 'vue';
+
+const page = ref(1)
 
 //const { data: planets, isLoading, error } = useFetch<Planet>('https://swapi.dev/api/planets/');
-const { data: planets, isLoading, error } = usePromise(getPlanets)
+//const { data: planets, isLoading, error } = usePromise(getPlanets)
+const { data: planets, isLoading, error } = useQuery<PlanetResponse>({
+    queryKey: ['planets', page],
+    queryFn: () => getPlanets(page.value),
+    staleTime: 10000
+})
 </script>
 
 
@@ -19,6 +28,9 @@ const { data: planets, isLoading, error } = usePromise(getPlanets)
                 {{ planet.name }}
             </li>
         </ul>
+        <button @click="page--">Page précédente</button>
+        <button @click="page++">Page suivante</button>
+
     </div>
 
 </template>

@@ -1,4 +1,5 @@
-import httpClient from '@/lib/instance';
+import httpClient from '@/modules/http-client';
+
 import type { LoginFormData, RegisterFormData } from '@/schemas/auth.schema';
 
 export const login = async (payload: LoginFormData) => {
