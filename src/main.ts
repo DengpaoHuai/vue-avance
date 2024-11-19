@@ -9,6 +9,7 @@ import App from './App.vue';
 import router from './router';
 import { plugin, defaultConfig } from '@formkit/vue';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import useAuthStore from './stores/auth';
 
 const app = createApp(App);
 const pinia = createPinia();
