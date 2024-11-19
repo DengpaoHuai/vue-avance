@@ -6,7 +6,7 @@ import useAuthStore from '@/stores/auth';
 import { storeToRefs } from 'pinia';
 
 
-const { token, refreshToken } = storeToRefs(useAuthStore())
+const { name, email } = storeToRefs(useAuthStore())
 
 
 const listener = (e) => {
@@ -36,12 +36,12 @@ const person = ref({
     <Button @click="person.name = 'toto'">
       {{ person.name }}
     </Button>
-    {{
-      token
+    Bonjour{{
+      name
     }}
-
+    email :
     {{
-      refreshToken
+      email
     }}
     <p>
       {{ person.age }}
