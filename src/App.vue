@@ -1,9 +1,5 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
-import CardComponent from './components/CardComponent.vue';
-const demo = ref('Reactivite');
-
 </script>
 
 <template>

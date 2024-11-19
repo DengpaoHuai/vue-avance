@@ -1,6 +1,6 @@
+import { getProfile } from '@/features/user/api/get-profile';
 import { defineStore } from 'pinia';
 import { onMounted, reactive, ref, watch } from 'vue';
-import { getProfile } from '../services/user.services';
 
 const useAuthStore = defineStore(
   'auth',

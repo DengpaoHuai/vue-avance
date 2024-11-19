@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { registerSchema, type RegisterFormData } from '@/schemas/auth.schema';
-import { login, register } from '@/services/auth.services';
+
 import { createZodPlugin } from '@formkit/zod'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { handleError } from '@/utils/handleError';
+import { register, registerSchema, type RegisterFormData } from '@/features/auth/api/register';
 
 const isLoading = ref(false)
 const error = ref<null | string>(null)
