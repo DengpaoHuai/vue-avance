@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { loginSchema } from './login';
+import httpClient from '@/modules/http-client';
 
 export const registerSchema = loginSchema.merge(
   z.object({
@@ -8,3 +9,8 @@ export const registerSchema = loginSchema.merge(
 );
 
 export type RegisterFormData = z.infer<typeof registerSchema>;
+
+export const register = async (payload: RegisterFormData) => {
+  const response = await httpClient.post('/auth/register', payload);
+  return response.data;
+};

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue';
-import TheWelcome from '../components/TheWelcome.vue'
 import Button from 'primevue/button';
 import useAuthStore from '@/stores/auth';
 import { storeToRefs } from 'pinia';
