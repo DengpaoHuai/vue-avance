@@ -11,7 +11,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe('register function', () => {
-  /* it('should register a user successfully', async () => {
+  /*it('should register a user successfully', async () => {
     const payload = {
       email: 'test@example.com',
       password: 'password123',
@@ -20,8 +20,8 @@ describe('register function', () => {
 
     const response = await register(payload);
     expect(response).toEqual({ message: 'User registered successfully' });
-  });*/
-
+  });
+*/
   it('should validate the schema for too short name', () => {
     const payload = {
       email: 'test@example.com',
