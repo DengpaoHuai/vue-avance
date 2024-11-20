@@ -5,11 +5,9 @@ import GlobalCard from './ui/GlobalCard.vue';
 const demoPlugin = {
   install(app: App<Element>, options) {
     // configure the app
-
-    app.component('global-card', GlobalCard);
-
+    //  app.component('global-card', GlobalCard);
     //app.directive('v-focus', vFocus);
-    app.provide('key', 'value');
+    // app.provide('key', 'value');
     //app.provide('demoPlugin', options);
   },
 };

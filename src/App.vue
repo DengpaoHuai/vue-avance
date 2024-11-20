@@ -10,17 +10,10 @@ const LoggedLayout = defineAsyncComponent(() =>
   import('./layouts/LoggedLayout.vue')
 )
 const route = useRoute();
-const demo = inject('key');
 </script>
 
 <template>
-  <GlobalCard>
-    <p>test custoù</p>
-  </GlobalCard>
-  <p>
 
-    {{ demo }}
-  </p>
   <component :is="route.meta.layout ?? 'DefaultLayout'">
     <RouterView></RouterView>
   </component>

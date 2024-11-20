@@ -25,10 +25,10 @@ app.use(PrimeVue, {
   },
 });
 
-app.use(demoPlugin, {
+/*app.use(demoPlugin, {
   theme: 'dark',
   piniaInstance: pinia,
-});
+});*/
 app.use(VueQueryPlugin);
 
 app.mount('#app');

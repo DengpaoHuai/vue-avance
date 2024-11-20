@@ -1,15 +1,20 @@
+import httpClient from '@/modules/http-client';
 import { ref, toRef, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { z } from 'zod';
 
 const useStepManager = () => {
   const currentStep = ref(1);
+  const router = useRouter();
+  const route = useRoute();
+
   const globalSteps = ref([
     {
       id: 1,
       name: 'Step 1',
       formInputs: [
         {
-          type: 'text',
+          type: 'email',
           name: 'email',
           label: 'Your email',
         },
@@ -48,25 +53,60 @@ const useStepManager = () => {
         },
       ],
     },
+    {
+      id: 4,
+      name: 'Step 4',
+      formInputs: [
+        {
+          type: 'text',
+          name: 'demo',
+          label: 'Your demo',
+        },
+      ],
+    },
   ]);
+
+  watch(
+    () => route.params.step,
+    (value) => {
+      console.log('value1');
+      currentStep.value = parseInt(value as string);
+    },
+    {
+      immediate: true,
+    },
+  );
 
   const nextStep = () => {
     console.log('nextStep');
+    router.push({
+      name: 'create_user',
+      params: { id: '1', step: currentStep.value + 1 },
+    });
     currentStep.value++;
   };
 
   const previousStep = () => {
+    console.log('previousStep');
+    router.push({
+      name: 'create_user',
+      params: { id: '1', step: currentStep.value - 1 },
+    });
     currentStep.value--;
   };
 
   const getStep = (stepId = currentStep.value) => {
-    let step = globalSteps.value.find((step) => step.id === stepId);
-    step.zodSchema = zodGenerator(globalSteps.value[stepId - 1]);
-    return step;
+    return {
+      ...globalSteps.value.find((step) => step.id === stepId),
+      zodSchema: zodGenerator(globalSteps.value[stepId - 1]),
+    };
   };
 
   const handleSubmit = (data: any) => {
-    console.log(data);
+    /* httpClient.post('/users', {
+      ...data,
+      currentStep: currentStep.value,
+    });*/
   };
 
   watch(currentStep, (newVal) => {
@@ -85,34 +125,6 @@ const useStepManager = () => {
 
 export default useStepManager;
 
-/*
-const zodSchema = ref(z.object(globalSteps.value[currentStep - 1].formInputs.map((field) => {
-    let schemaObject = {}
-
-    switch (field.type) {
-        case "string":
-            schemaObject[field.name] = z.string()
-            break;
-        case "text":
-            schemaObject[field.name] = z.string()
-            break;
-        case "password":
-            schemaObject[field.name] = z.string()
-            break;
-        case "number":
-            schemaObject[field.name] = z.number()
-            break;
-
-        default:
-            break;
-    }
-
-    if (field.regex) {
-        schemaObject[field.name] = schemaObject[field.name].regex(new RegExp(field.regex))
-    }
-    return schemaObject
-})))*/
-
 type FormInput = {
   label: string;
   type: 'text' | 'email' | 'password' | 'select' | 'radio' | 'checkbox' | 'number';
@@ -126,7 +138,6 @@ type GlobalSteps = {
 };
 
 export const zodGenerator = (akData: GlobalSteps) => {
-  //remove label
   let cleanFields = akData.formInputs;
 
   let listFields = cleanFields
@@ -149,13 +160,16 @@ export const zodGenerator = (akData: GlobalSteps) => {
           return {
             [field.name]: z.string(),
           };
+        case 'email':
+          return {
+            [field.name]: z.string().email(),
+          };
         default:
           return null;
       }
     })
     .filter((field) => field !== null)
     .reduce((acc, curr) => ({ ...acc, ...curr }), {});
-  // .reduce((acc, curr) => ({ ...acc, ...curr }), {})
   console.log(listFields);
-  return z.object({});
+  return z.object(listFields);
 };
