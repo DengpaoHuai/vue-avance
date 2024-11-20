@@ -5,6 +5,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { handleError } from '@/utils/handleError';
 import { register, registerSchema, type RegisterFormData } from '@/features/auth/api/register';
+import { Button } from 'primevue';
 
 const isLoading = ref(false)
 const error = ref<null | string>(null)
@@ -36,5 +37,6 @@ const [zodPlugin, submitHandler] = createZodPlugin(
                 error
             }}
         </p>
+        <Button type="submit">Register</Button>
     </FormKit>
 </template>

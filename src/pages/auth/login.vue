@@ -30,12 +30,14 @@ const [zodPlugin, submitHandler] = createZodPlugin(
         })
     }
 )
+
+
 </script>
 
 <template>
     <h1>Validation from Zod schema</h1>
     <FormKit type="form" :plugins="[zodPlugin]" @submit="submitHandler">
-
+        <input v-focus type="text" name="email" label="Your email" />
         <FormKit type="text" name="email" label="Your email" />
         <FormKit type="password" name="password" label="Your password" />
         <p v-if="error">

@@ -11,6 +11,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 import { VueQueryPlugin } from '@tanstack/vue-query';
 import router from './pages/router';
+import demoPlugin from './plugins/demo-plugin';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -22,6 +23,11 @@ app.use(PrimeVue, {
   theme: {
     preset: Aura,
   },
+});
+
+app.use(demoPlugin, {
+  theme: 'dark',
+  piniaInstance: pinia,
 });
 app.use(VueQueryPlugin);
 

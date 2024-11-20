@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from './index.vue';
+import useAuthStore from '@/stores/auth';
+import { getProducts } from '@/features/products/api/useProducts';
+import httpClient from '@/modules/http-client';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,7 +28,14 @@ const router = createRouter({
       ],
     },
     {
+      path: '/users/create/:id/:step',
+      name: 'create_user',
+      component: () => import('./users/create/index.vue'),
+    },
+    {
       path: '/products',
+      beforeEnter: async (to, from, next) => {},
+      meta: { layout: 'LoggedLayout' },
       children: [
         {
           path: '',

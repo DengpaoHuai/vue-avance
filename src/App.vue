@@ -1,9 +1,29 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
+import { useRoute } from 'vue-router';
+import { inject } from 'vue';
 
+const DefaultLayout = defineAsyncComponent(() =>
+  import('./layouts/DefaultLayout.vue')
+)
+const LoggedLayout = defineAsyncComponent(() =>
+  import('./layouts/LoggedLayout.vue')
+)
+const route = useRoute();
+const demo = inject('key');
 </script>
 
 <template>
-  <RouterView></RouterView>
+  <GlobalCard>
+    <p>test custoù</p>
+  </GlobalCard>
+  <p>
+
+    {{ demo }}
+  </p>
+  <component :is="route.meta.layout ?? 'DefaultLayout'">
+    <RouterView></RouterView>
+  </component>
 </template>
 
 <style scoped>
